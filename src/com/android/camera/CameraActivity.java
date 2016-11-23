@@ -141,7 +141,6 @@ import com.android.camera.util.Callback;
 import com.android.camera.util.CameraUtil;
 import com.android.camera.util.GalleryHelper;
 import com.android.camera.util.GcamHelper;
-import com.android.camera.util.GoogleHelpHelper;
 import com.android.camera.util.IntentHelper;
 import com.android.camera.util.PhotoSphereHelper.PanoramaViewHelper;
 import com.android.camera.util.QuickActivity;
@@ -1359,10 +1358,6 @@ public class CameraActivity extends QuickActivity
             case R.id.action_details:
                 showDetailsDialog(mFilmstripController.getCurrentAdapterIndex());
                 return true;
-            case R.id.action_help_and_feedback:
-                mResetToPreviewOnResume = false;
-                new GoogleHelpHelper(this).launchGoogleHelp();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -2304,7 +2299,7 @@ public class CameraActivity extends QuickActivity
         if (isSecureCamera() && !ApiHelper.isLOrHigher()) {
             // Compatibility pre-L: launching new activities right above
             // lockscreen does not reliably work, only show help if not secure
-            menu.removeItem(R.id.action_help_and_feedback);
+            return true;
         }
 
         return super.onPrepareOptionsMenu(menu);
